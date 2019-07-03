@@ -1,0 +1,27 @@
+body {
+    background-color:#F0D9CA;
+}
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #AF785F;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.footer a {
+    color:white;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.footer p {
+    line-height: 1.5em;
+}
+
+a.author {font-size: 0.85em;}

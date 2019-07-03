@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Batch svg2png</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Batch convert SVG images to PNG images. 批次轉換: svg2png。">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-129572979-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-129572979-1');
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.4/rgbcolor.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stackblur-canvas@^1/dist/stackblur.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvg/dist/browser/canvg.min.js"></script>
+    <script src="svg2png.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <h1>Batch Convert SVG to PNG</h1>
+
+    <input id='uploads' type='file' multiple accept='image/svg+xml'>
+
+    <button id="download" class="download">Dowload all PNGs</button>
+    <span class="download" style="font-size:0.9em;color:grey">(Please allow multiple files download in browser)</span>
+
+    <br>
+    <ul class="download-links"></ul>
+    <canvas id="canvas" style='display:none'></canvas>
+
+
+    <div class="footer">
+        <p><a href="http://github.com/liao961120/svg2png">Source code</a><br>
+            © <b><a class='author' href="https://liao961120.github.io">Yongfu Liao</a></b>
+        </p>
+    </div>
+
+</body>
+
+</html>
