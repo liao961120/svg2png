@@ -6,6 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Preload image
     document.querySelector('input#uploads').onchange = function() {
+        // Clean up
+        document.querySelectorAll('li').forEach(item => item.parentNode.removeChild(item));
+        document.querySelectorAll('.download').forEach(item => item.style.display = 'none');
+        document.querySelectorAll('.convert').forEach(item => item.style.display = 'none');
+
         var files = this.files;
         for (let i=0; i < files.length; ++i) {
             
