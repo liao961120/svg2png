@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             img.linkID = link.id;
             img.style.display = 'none';
             img.onload = function() {
-                SVGs.push({linkID: this.linkID, width: this.width, height: this.height, dataURL: this.src})
+                SVGs.push({linkID: this.linkID, width: this.width, height: this.height, dataURL: this.src});
             };
             document.querySelector('body').append(img)
         };
