@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
-            console.log(SVGs[j].dataURL, )
         };//endfor
 
         // Show download button
