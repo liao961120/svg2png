@@ -1,12 +1,10 @@
 var SVGs = [];
 
-
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.download').forEach(item => item.style.display = 'none');
     document.querySelectorAll('.convert').forEach(item => item.style.display = 'none');
 
     // Preload image
-    // Get uploaded files
     document.querySelector('input#uploads').onchange = function() {
         var files = this.files;
         for (let i=0; i < files.length; ++i) {
@@ -22,12 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
             link.innerHTML = `${filename}.png`;
             link.id = filename.replace(/ +/g, '-');
             link.className = 'downloadLink';
-            // Release objectURL for next loop
-            link.onload = function() {
-                URL.revokeObjectURL(this.src);
-            }
 
-            // load img to get aspect ratio
+            // load img to get height & width
             var img = document.createElement('img');
             img.src = URL.createObjectURL(files[i]);
             img.linkID = link.id;
@@ -38,40 +32,48 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('body').append(img)
         };
 
-    // Show convert button
-    document.querySelectorAll('.convert').forEach(item => item.style.display = 'inline');
+        // Show convert button
+        document.querySelectorAll('.convert').forEach(item => item.style.display = 'inline');
     };
 
     // Convert image to svg
     document.querySelector('#convert').onclick = () => {
         // Read Scale factor
-        var SF = parseFloat(document.querySelector('input#SF').value);  
-        if (!document.querySelector('input#SF').value)
-            SF = 1;
+        var DPI = parseFloat(document.querySelector('input#DPI').value);  
+        if (!document.querySelector('input#DPI').value)
+            DPI = 96;
 
         // Render svgs
         for (let j=0; j < SVGs.length; ++j) {
-            // Render svg to canvas
-            // Get chart aspect ratio
-
             // Set canvas size
-            canvas = document.querySelector('#canvas');
-            canvas.width = SVGs[j].width * SF;
-            canvas.height = SVGs[j].height * SF;
+            var canvas = document.querySelector('#canvas');
+            var SF = DPI/96;
+            canvas.width = Math.ceil(SVGs[j].width * SF);
+            canvas.height = Math.ceil(SVGs[j].height * SF);
 
+            // Render svg to canvas
             canvg(canvas, SVGs[j].dataURL, {
                 ignoreDimensions: true,
-                scaleWidth: canvas.width,
-                scaleHeight: canvas.height
+                scaleWidth: SVGs[j].width * SF,
+                scaleHeight: SVGs[j].height * SF,
+                ignoreClear: false,
+                renderCallback: function() {
+                    // Save as png
+                    canvas.toBlob(function(blob) {
+                        var url = URL.createObjectURL(blob);
+                        document.querySelector(`#${SVGs[j].linkID}`).href = url;
+                        // Release URL
+                        document.querySelector(`#${SVGs[j].linkID}`).onload = function() {
+                            URL.revokeObjectURL(url);
+                        };
+                    });
+                }
             });
+            console.log(SVGs[j].dataURL, )
+        };//endfor
 
-            // Save as png
-            var img = canvas.toDataURL("image/png");
-            document.querySelector(`#${SVGs[j].linkID}`).href = img;
-
-            // Show download button
-            document.querySelectorAll('.download').forEach(item => item.style.display = 'inline');
-        }
+        // Show download button
+        document.querySelectorAll('.download').forEach(item => item.style.display = 'inline');
     };
 
     // batch download
