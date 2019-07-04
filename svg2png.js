@@ -10,10 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('li').forEach(item => item.parentNode.removeChild(item));
         document.querySelectorAll('.download').forEach(item => item.style.display = 'none');
         document.querySelectorAll('.convert').forEach(item => item.style.display = 'none');
+        SVGs = [];
 
+        // Save local image blobs and info
         var files = this.files;
         for (let i=0; i < files.length; ++i) {
-            
             // Write download link
             var filename = files[i].name.split('.').slice(0, -1).join('.')
             var li = document.createElement('li');
