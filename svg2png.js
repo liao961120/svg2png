@@ -62,10 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     canvas.toBlob(function(blob) {
                         var url = URL.createObjectURL(blob);
                         document.querySelector(`#${SVGs[j].linkID}`).href = url;
-                        // Release URL
-                        document.querySelector(`#${SVGs[j].linkID}`).onload = function() {
-                            URL.revokeObjectURL(url);
-                        };
                     });
                 }
             });
