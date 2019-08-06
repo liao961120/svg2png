@@ -4,6 +4,6 @@ This is a small web app (with no server) that converts SVG images to PNG images.
 
 ## Usage
 
-Simply visit <https://liao961120.github.io/svg2png> and the rest should be clear.
+Simply visit <https://svg2png.yongfu.name> and the rest should be clear.
 
 Note that to change the resolution of the output PNGs, you can set **DPI** (defaults to 96) after uploading the SVGs.
